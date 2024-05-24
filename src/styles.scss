@@ -1,0 +1,87 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$wedding-website-primary: mat.define-palette(mat.$indigo-palette);
+$wedding-website-accent: mat.define-palette(
+  mat.$pink-palette,
+  A200,
+  A100,
+  A400
+);
+
+// The warn palette is optional (defaults to red).
+$wedding-website-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$wedding-website-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $wedding-website-primary,
+      accent: $wedding-website-accent,
+      warn: $wedding-website-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($wedding-website-theme);
+
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Signature";
+  src: url("assets/fonts/Quick\ Signature\ Personal\ Use.otf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Monserrat";
+  src: url("assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Poiret";
+  src: url("assets/fonts/PoiretOne-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Allura";
+  src: url("assets/fonts/Allura-Regular.ttf") format("truetype");
+}
+
+.font-header {
+  // PT Serif
+  font-family: "Parisienne", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  font-family: "Monserrat";
+}
+
+// .font-header {
+//   font-family: "Poiret";
+// }
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

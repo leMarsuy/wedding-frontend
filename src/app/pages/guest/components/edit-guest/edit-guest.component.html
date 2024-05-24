@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Edit Guest</h1>
+<div mat-dialog-content>
+  <form [formGroup]="guestForm" class="flex flex-col">
+    <mat-form-field>
+      <mat-label>Database ID</mat-label>
+      <input formControlName="id" matInput disable />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Name of the Guest</mat-label>
+      <input formControlName="name" matInput required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Allocated Seats</mat-label>
+      <input formControlName="allowedPlusses" matInput required />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button color="warn" (click)="onClickDelete()">
+    Delete
+  </button>
+  <button mat-raised-button (click)="onClickUpdateGuestDetails()">
+    Update Guest Details
+  </button>
+</div>

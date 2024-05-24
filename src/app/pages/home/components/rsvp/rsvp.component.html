@@ -1,0 +1,117 @@
+<div class="py-12 text-center bg-gold">
+  <div class="container mx-auto mb-12 px-4">
+    <p class="text-5xl font-header mb-4">Répondez S'il Vous Plaît.</p>
+    <p>
+      Please respond no later than <span class="font-black">Feb 01, 2025</span>.
+      We hope to celebrate with you!
+    </p>
+  </div>
+  <form [formGroup]="rsvpForm" class="w-full text-left md:px-32 px-8">
+    <p class="font-semibold">Full Name</p>
+    <mat-form-field class="w-full">
+      <input matInput formControlName="name" />
+    </mat-form-field>
+    <div class="error mt-4" *ngIf="showError">
+      <p class="mb-6">
+        Sorry your name was not found on our guestlist. As you know, the venue
+        has a limited capacity and not inviting you on our wedding doesn't mean
+        that you don't mean to us. Hope we could catch up some other time!
+      </p>
+      <p class="text-xs">
+        Or we might just mispell your name on our database. If you think there
+        is a mistake, kindly message Joy or Marci directly so we could update
+        our list.
+      </p>
+    </div>
+    <div
+      class="text-right w-full mt-4 mb-24"
+      *ngIf="!rsvpForm.get('id')?.value"
+      (click)="onClickSearch()"
+    >
+      <button
+        class="border-2 border-black px-12 py-2 disabled:opacity-30"
+        [disabled]="!rsvpForm.get('name')?.value || searching"
+      >
+        {{ searching ? "Searching..." : "Search Name" }}
+      </button>
+    </div>
+
+    <ng-container *ngIf="rsvpForm.get('id')?.value">
+      <div class="mt-4 mb-8">
+        <p class="mb-4 font-semibold">Will you be joining us?</p>
+        <mat-radio-group formControlName="isAttending">
+          <mat-radio-button
+            class="mr-4"
+            *ngFor="let item of yesNo"
+            [value]="item"
+          >
+            {{ item }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <!-- IF DECIDED TO ATTEND -->
+
+      <ng-container *ngIf="rsvpForm.get('isAttending')?.value === 'Yes'">
+        <p class="font-semibold">E-mail Address</p>
+        <mat-form-field class="w-full">
+          <input matInput formControlName="email" />
+        </mat-form-field>
+        <p class="font-semibold">Mobile No.</p>
+        <mat-form-field class="w-full">
+          <input matInput formControlName="mobileNumber" />
+        </mat-form-field>
+
+        <ng-container *ngIf="allowedPlusses > 0">
+          <p class="font-semibold mb-4">
+            You can bring <b class="underline">{{ allowedPlusses }}</b> more
+            guest(s).
+          </p>
+          <div class="grid grid-cols-4 gap-2" formArrayName="plusses">
+            <ng-container
+              *ngFor="let plusOne of plusses.controls; let i = index"
+            >
+              <ng-container [formGroupName]="i">
+                <mat-form-field class="col-span-3">
+                  <input
+                    matInput
+                    placeholder="Guest #{{ i + 1 }}"
+                    formControlName="name"
+                  />
+                </mat-form-field>
+                <mat-form-field class="col-span-1">
+                  <input
+                    matInput
+                    placeholder="Age"
+                    formControlName="age"
+                  /> </mat-form-field
+              ></ng-container>
+            </ng-container>
+          </div>
+        </ng-container>
+
+        <p class="font-semibold mt-2">Send a note to the couple</p>
+        <mat-form-field class="w-full">
+          <textarea matInput rows="5" formControlName="notes"></textarea>
+        </mat-form-field>
+      </ng-container>
+
+      <div class="text-right w-full py-6">
+        <button
+          class="text-red-600 px-16 py-4 disabled:opacity-30"
+          (click)="onClickClearDetails()"
+          [disabled]="sendingRSPV"
+        >
+          Clear Details
+        </button>
+        <button
+          class="border-2 border-black px-16 py-4 disabled:opacity-30"
+          (click)="onClickSubmitRSVP()"
+          [disabled]="sendingRSPV"
+        >
+          Submit
+        </button>
+      </div>
+    </ng-container>
+  </form>
+</div>
