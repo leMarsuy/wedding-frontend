@@ -4,10 +4,10 @@ const http = require("http");
 
 const app = express();
 
-app.use(express.static(__dirname + "/dist/wedding-frontend/"));
+app.use(express.static(__dirname + "/dist/wedding-website/"));
 
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist/wedding-frontend/index.html"));
+  res.sendFile(path.join(__dirname, "dist/wedding-website/index.html"));
 });
 
 const port = process.env.PORT || "4998";
