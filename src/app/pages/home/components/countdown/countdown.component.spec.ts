@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RsvpLinkComponent } from './rsvp-link.component';
+import { CountdownComponent } from './countdown.component';
 
-describe('RsvpLinkComponent', () => {
-  let component: RsvpLinkComponent;
-  let fixture: ComponentFixture<RsvpLinkComponent>;
+describe('CountdownComponent', () => {
+  let component: CountdownComponent;
+  let fixture: ComponentFixture<CountdownComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RsvpLinkComponent ]
+      declarations: [ CountdownComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RsvpLinkComponent);
+    fixture = TestBed.createComponent(CountdownComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

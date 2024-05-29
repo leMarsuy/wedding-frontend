@@ -5,7 +5,6 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { LandingComponent } from './components/landing/landing.component';
-import { RsvpLinkComponent } from './components/rsvp-link/rsvp-link.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { RegistryComponent } from './components/registry/registry.component';
 import { RsvpComponent } from './components/rsvp/rsvp.component';
@@ -14,16 +13,22 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
+import { CountdownComponent } from './components/countdown/countdown.component';
+import { MapModule } from 'src/app/shared/map/map.module';
+import { AttireComponent } from './components/attire/attire.component';
+import { FaqsComponent } from './components/faqs/faqs.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     HeaderComponent,
     LandingComponent,
-    RsvpLinkComponent,
     ScheduleComponent,
     RegistryComponent,
     RsvpComponent,
+    CountdownComponent,
+    AttireComponent,
+    FaqsComponent,
   ],
   imports: [
     CommonModule,
@@ -34,14 +39,16 @@ import { MatRadioModule } from '@angular/material/radio';
     MatInputModule,
     MatButtonModule,
     MatRadioModule,
+    MapModule,
   ],
   exports: [
     HeaderComponent,
     LandingComponent,
-    RsvpLinkComponent,
     ScheduleComponent,
     RegistryComponent,
     RsvpComponent,
+    CountdownComponent,
+    AttireComponent,
   ],
 })
 export class HomeModule {}

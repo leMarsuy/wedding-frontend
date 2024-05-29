@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { WeddingApiService } from 'src/app/services/api/wedding-api/wedding-api.service';
 
 @Component({
-  selector: 'app-rsvp-link',
-  templateUrl: './rsvp-link.component.html',
-  styleUrls: ['./rsvp-link.component.scss'],
+  selector: 'app-countdown',
+  templateUrl: './countdown.component.html',
+  styleUrls: ['./countdown.component.scss'],
 })
-export class RsvpLinkComponent implements OnInit {
-  weddingDate = new Date();
+export class CountdownComponent implements OnInit {
+  weddingDate = new Date(
+    'Wed Feb 26 2025 15:30:00 GMT+0800 (Philippine Standard Time)'
+  );
   diffInMs = 0;
   cd = { days: 0, hours: 0, mins: 0, secs: 0 };
 
@@ -19,13 +21,13 @@ export class RsvpLinkComponent implements OnInit {
 
   getWeddingDate() {
     var currentDate = new Date();
-    this.weddingApi.getWeddingDate().subscribe((res: any) => {
-      console.log(res);
-      this.weddingDate = new Date(res.env.weddingDate);
-      this.diffInMs =
-        Math.abs(currentDate.getTime() - this.weddingDate.getTime()) / 1000;
-      this.timerSet();
-    });
+    // this.weddingApi.getWeddingDate().subscribe((res: any) => {
+    // console.log(res);
+    // this.weddingDate = new Date(res.env.weddingDate);
+    this.diffInMs =
+      Math.abs(currentDate.getTime() - this.weddingDate.getTime()) / 1000;
+    this.timerSet();
+    // });
   }
 
   timerSet() {

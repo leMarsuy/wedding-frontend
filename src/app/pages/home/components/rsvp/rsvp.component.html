@@ -1,6 +1,8 @@
-<div class="py-12 text-center bg-gold">
-  <div class="container mx-auto mb-12 px-4">
-    <p class="text-5xl font-header mb-4">Répondez S'il Vous Plaît.</p>
+<div class="py-24 text-center bg-gold">
+  <div class="container mx-auto mb-12 px-8">
+    <p class="md:text-5xl text-3xl font-bold font-header mb-4">
+      Répondez S'il Vous Plaît.
+    </p>
     <p>
       Please respond no later than <span class="font-black">Feb 01, 2025</span>.
       We hope to celebrate with you!
@@ -98,14 +100,14 @@
 
       <div class="text-right w-full py-6">
         <button
-          class="text-red-600 px-16 py-4 disabled:opacity-30"
+          class="text-red-600 px-12 py-4 disabled:opacity-30"
           (click)="onClickClearDetails()"
           [disabled]="sendingRSPV"
         >
-          Clear Details
+          Clear
         </button>
         <button
-          class="border-2 border-black px-16 py-4 disabled:opacity-30"
+          class="border-2 border-black px-12 py-4 disabled:opacity-30"
           (click)="onClickSubmitRSVP()"
           [disabled]="sendingRSPV"
         >

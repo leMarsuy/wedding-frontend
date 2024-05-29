@@ -40,42 +40,10 @@ $wedding-website-theme: mat.define-light-theme(
 @include mat.all-component-themes($wedding-website-theme);
 
 /* You can add global styles to this file, and also import other style files */
-@font-face {
-  font-family: "Signature";
-  src: url("assets/fonts/Quick\ Signature\ Personal\ Use.otf")
-    format("truetype");
-}
 
-@font-face {
-  font-family: "Monserrat";
-  src: url("assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf")
-    format("truetype");
-}
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 
-@font-face {
-  font-family: "Poiret";
-  src: url("assets/fonts/PoiretOne-Regular.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Allura";
-  src: url("assets/fonts/Allura-Regular.ttf") format("truetype");
-}
-
-.font-header {
-  // PT Serif
-  font-family: "Parisienne", serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-* {
-  font-family: "Monserrat";
-}
-
-// .font-header {
-//   font-family: "Poiret";
-// }
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
 
 html,
 body {
@@ -83,5 +51,31 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  // font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+// @import url();
+
+.font-header {
+  font-family: "Lora", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  font-family: "Josefin Sans";
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  height: 6px;
+  border: 4px solid rgba(0, 0, 0, 0);
+  background-clip: padding-box;
+  --webkit-border-radius: 7px;
+  background-color: #e3e3e365;
+}
+
+@import "aos/dist/aos.css";
