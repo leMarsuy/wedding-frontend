@@ -1,7 +1,7 @@
 <div class="container mx-auto py-12 px-10">
   <div class="flex justify-between mb-4 p-6 border-gray mat-elevation-z1">
-    <h3 class="font-bold text-center">Our Guests</h3>
-    <button mat-raised-button (click)="onClickAddGuestBtn()">
+    <h3 class="font-bold text-center text-2xl">Our Guests</h3>
+    <button mat-raised-button color="primary" (click)="onClickAddGuestBtn()">
       + Add Guest
     </button>
   </div>
@@ -11,7 +11,7 @@
       <p>Total Invitations</p>
     </div>
 
-    <div class="col-span-1 flex mat-elevation-z1 p-4">
+    <div class="col-span-1 flex mat-elevation-z1 p-4 bg-[]">
       <h1 class="w-[4rem]">{{ stats.totalPositiveResponse }}</h1>
       <p>Positive Response</p>
     </div>
@@ -85,7 +85,7 @@
         >
           edit
         </mat-icon>
-        <mat-icon class="cursor-pointer">delete</mat-icon>
+        <mat-icon class="cursor-pointer text-red-600">delete</mat-icon>
       </td>
     </ng-container>
 

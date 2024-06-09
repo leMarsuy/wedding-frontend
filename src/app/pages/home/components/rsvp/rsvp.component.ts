@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { GuestApiService } from 'src/app/services/api/guest-api/guest-api.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class RsvpComponent implements OnInit {
   searching = false;
   allowedPlusses = 0;
   sendingRSPV = false;
+  searchSubscription!: Subscription;
 
   rsvpForm = new FormGroup({
     id: new FormControl({ value: '', disabled: true }, [Validators.required]),
@@ -35,47 +37,69 @@ export class RsvpComponent implements OnInit {
     if (!name) return;
     this.searching = true;
     name = name.toUpperCase();
-    this.guestApi.searchGuestByName(name).subscribe((res: any) => {
-      console.log(res);
-      this.searching = false;
-      if (res.env.guest) {
-        this.showError = false;
-        var {
-          _id,
-          name,
-          email,
-          mobileNumber,
-          allowedPlusses,
-          isAttending,
-          notes,
-          plusses,
-        } = res.env.guest;
-        this.allowedPlusses = allowedPlusses;
-        this.rsvpForm.patchValue({
-          id: _id,
-          name,
-          email,
-          mobileNumber,
-          notes,
-          isAttending,
-        });
-        this.rsvpForm.get('name')?.disable();
-        this.populateGuest(allowedPlusses, plusses);
-        // loop plusses here
-      } else {
-        this.showError = true;
-      }
-    });
+    this.searchSubscription = this.guestApi
+      .searchGuestByName(name)
+      .subscribe((res: any) => {
+        this.searching = false;
+        if (res.env.guest) {
+          this.showError = false;
+          var {
+            _id,
+            name,
+            email,
+            mobileNumber,
+            allowedPlusses,
+            isAttending,
+            notes,
+            plusses,
+          } = res.env.guest;
+          this.allowedPlusses = allowedPlusses;
+          this.rsvpForm.patchValue({
+            id: _id,
+            name,
+            email,
+            mobileNumber,
+            notes,
+            isAttending,
+          });
+          this.rsvpForm.get('name')?.disable();
+          this.populateGuest(plusses || []);
+          console.log(this.rsvpForm);
+        } else {
+          this.showError = true;
+        }
+      });
   }
 
-  populateGuest(allowedPlusses: number, plusses?: Array<any>) {
-    for (let i = 0; i < allowedPlusses; i++)
+  cancelSearching() {
+    this.searchSubscription.unsubscribe();
+  }
+
+  populateGuest(plusses: Array<any>) {
+    for (let i = 0; i < plusses?.length; i++)
       this.plusses.push(
         new FormGroup({
-          name: new FormControl(plusses && plusses[i] ? plusses[i].name : ''),
-          age: new FormControl(plusses && plusses[i] ? plusses[i].age : ''),
+          name: new FormControl(plusses && plusses[i] ? plusses[i].name : '', [
+            Validators.required,
+          ]),
+          age: new FormControl(plusses && plusses[i] ? plusses[i].age : '', [
+            Validators.required,
+          ]),
         })
       );
+  }
+
+  pushGuestFields() {
+    this.plusses.push(
+      new FormGroup({
+        name: new FormControl('', [Validators.required]),
+        age: new FormControl('', [Validators.required]),
+      })
+    );
+  }
+
+  removeGuestFields(i: number) {
+    this.plusses.removeAt(i);
   }
 
   onClickSubmitRSVP() {

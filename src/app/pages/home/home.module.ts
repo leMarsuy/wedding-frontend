@@ -17,6 +17,7 @@ import { CountdownComponent } from './components/countdown/countdown.component';
 import { MapModule } from 'src/app/shared/map/map.module';
 import { AttireComponent } from './components/attire/attire.component';
 import { FaqsComponent } from './components/faqs/faqs.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { FaqsComponent } from './components/faqs/faqs.component';
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
     MatButtonModule,
     MatRadioModule,

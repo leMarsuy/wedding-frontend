@@ -8,7 +8,10 @@
       We hope to celebrate with you!
     </p>
   </div>
-  <form [formGroup]="rsvpForm" class="w-full text-left md:px-32 px-8">
+  <form
+    [formGroup]="rsvpForm"
+    class="max-w-[60rem] mx-auto text-left md:px-32 px-8"
+  >
     <p class="font-semibold">Full Name</p>
     <mat-form-field class="w-full">
       <input matInput formControlName="name" />
@@ -69,7 +72,7 @@
             You can bring <b class="underline">{{ allowedPlusses }}</b> more
             guest(s).
           </p>
-          <div class="grid grid-cols-4 gap-2" formArrayName="plusses">
+          <div class="grid grid-cols-5 gap-2" formArrayName="plusses">
             <ng-container
               *ngFor="let plusOne of plusses.controls; let i = index"
             >
@@ -81,14 +84,24 @@
                     formControlName="name"
                   />
                 </mat-form-field>
-                <mat-form-field class="col-span-1">
+                <mat-form-field class="col-span-2">
                   <input
                     matInput
                     placeholder="Age"
                     formControlName="age"
-                  /> </mat-form-field
-              ></ng-container>
+                    type="number"
+                  />
+                  <mat-icon matSuffix (click)="removeGuestFields(i)">
+                    close
+                  </mat-icon>
+                </mat-form-field>
+              </ng-container>
             </ng-container>
+            <div class="mb-8" *ngIf="allowedPlusses > plusses.length">
+              <button mat-stroked-button (click)="pushGuestFields()">
+                + Add Guest
+              </button>
+            </div>
           </div>
         </ng-container>
 
@@ -109,7 +122,7 @@
         <button
           class="border-2 border-black px-12 py-4 disabled:opacity-30"
           (click)="onClickSubmitRSVP()"
-          [disabled]="sendingRSPV"
+          [disabled]="sendingRSPV || !rsvpForm.valid"
         >
           Submit
         </button>
