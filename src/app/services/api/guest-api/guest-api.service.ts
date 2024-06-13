@@ -14,14 +14,24 @@ export class GuestApiService {
     return this.httpClient.get(this.URL + 'guests');
   }
 
-  addGuest(name: string, allowedPlusses: number) {
-    return this.httpClient.post(this.URL + 'guests', { name, allowedPlusses });
+  addGuest(name: string, allowedPlusses: number, plusses?: Array<any>) {
+    return this.httpClient.post(this.URL + 'guests', {
+      name,
+      allowedPlusses,
+      plusses,
+    });
   }
 
-  editGuest(id: string, name: string, allowedPlusses: number) {
+  editGuest(
+    id: string,
+    name: string,
+    allowedPlusses: number,
+    plusses?: Array<any>
+  ) {
     return this.httpClient.post(this.URL + 'guests/' + id, {
       name,
       allowedPlusses,
+      plusses,
     });
   }
 

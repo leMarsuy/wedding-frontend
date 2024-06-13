@@ -11,6 +11,7 @@
       <input formControlName="allowedPlusses" matInput required />
     </mat-form-field>
 
+    <p class="mb-2">Identified Guests:</p>
     <div class="grid grid-cols-5 gap-2" formArrayName="plusses">
       <ng-container *ngFor="let plusOne of plusses.controls; let i = index">
         <ng-container [formGroupName]="i">
@@ -34,11 +35,11 @@
           </mat-form-field>
         </ng-container>
       </ng-container>
-      <div class="mb-8" *ngIf="allowedPlusses > plusses.length">
-        <button mat-stroked-button (click)="pushGuestFields()">
-          + Add Guest
-        </button>
-      </div>
+    </div>
+    <div class="mb-8 mt-2" *ngIf="allowedPlusses > plusses.length">
+      <button mat-stroked-button (click)="pushGuestFields()">
+        + Add Guest
+      </button>
     </div>
   </form>
 </div>

@@ -11,7 +11,7 @@ import { GuestApiService } from 'src/app/services/api/guest-api/guest-api.servic
 export class AddGuestComponent implements OnInit {
   guestForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    allowedPlusses: new FormControl('', [Validators.required]),
+    allowedPlusses: new FormControl(0, [Validators.required]),
     plusses: new FormArray([]),
   });
 
@@ -23,9 +23,9 @@ export class AddGuestComponent implements OnInit {
   ngOnInit(): void {}
 
   onClickAddToGuestList() {
-    var { name, allowedPlusses } = this.guestForm.value;
+    var { name, allowedPlusses, plusses } = this.guestForm.value;
     name = name.toUpperCase();
-    this.guestApi.addGuest(name, allowedPlusses).subscribe((res) => {
+    this.guestApi.addGuest(name, allowedPlusses, plusses).subscribe((res) => {
       this.dialogRef.close();
     });
   }
@@ -47,7 +47,7 @@ export class AddGuestComponent implements OnInit {
     return this.guestForm.get('plusses') as FormArray;
   }
 
-  get allowedPlusses(): number {
-    return Number(this.guestForm.get('allowedPlusses')) || 0;
+  get allowedPlusses() {
+    return this.guestForm?.get('allowedPlusses')?.value;
   }
 }

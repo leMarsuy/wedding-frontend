@@ -15,6 +15,37 @@
       <mat-label>Allocated Seats</mat-label>
       <input formControlName="allowedPlusses" matInput required />
     </mat-form-field>
+
+    <p class="mb-2">Identified Guests:</p>
+    <div class="grid grid-cols-5 gap-2" formArrayName="plusses">
+      <ng-container *ngFor="let plusOne of plusses.controls; let i = index">
+        <ng-container [formGroupName]="i">
+          <mat-form-field class="col-span-3">
+            <input
+              matInput
+              placeholder="Guest #{{ i + 1 }}"
+              formControlName="name"
+            />
+          </mat-form-field>
+          <mat-form-field class="col-span-2">
+            <input
+              matInput
+              placeholder="Age"
+              formControlName="age"
+              type="number"
+            />
+            <mat-icon matSuffix (click)="removeGuestFields(i)">
+              close
+            </mat-icon>
+          </mat-form-field>
+        </ng-container>
+      </ng-container>
+    </div>
+    <div class="mb-8 mt-2" *ngIf="allowedPlusses > plusses.length">
+      <button mat-stroked-button (click)="pushGuestFields()">
+        + Add Guest
+      </button>
+    </div>
   </form>
 </div>
 <div mat-dialog-actions align="end">
