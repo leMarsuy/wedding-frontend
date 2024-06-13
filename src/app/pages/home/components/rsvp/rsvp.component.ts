@@ -102,6 +102,10 @@ export class RsvpComponent implements OnInit {
     this.plusses.removeAt(i);
   }
 
+  get plusses() {
+    return this.rsvpForm.get('plusses') as FormArray;
+  }
+
   onClickSubmitRSVP() {
     this.sendingRSPV = true;
     var { id, mobileNumber, email, plusses, notes, isAttending } =
@@ -119,9 +123,5 @@ export class RsvpComponent implements OnInit {
     this.rsvpForm.reset();
     this.plusses.clear();
     this.rsvpForm.get('name')?.enable();
-  }
-
-  get plusses() {
-    return this.rsvpForm.get('plusses') as FormArray;
   }
 }

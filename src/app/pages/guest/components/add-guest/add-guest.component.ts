@@ -12,6 +12,7 @@ export class AddGuestComponent implements OnInit {
   guestForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     allowedPlusses: new FormControl('', [Validators.required]),
+    plusses: new FormArray([]),
   });
 
   constructor(
@@ -27,5 +28,26 @@ export class AddGuestComponent implements OnInit {
     this.guestApi.addGuest(name, allowedPlusses).subscribe((res) => {
       this.dialogRef.close();
     });
+  }
+
+  pushGuestFields() {
+    this.plusses.push(
+      new FormGroup({
+        name: new FormControl('', [Validators.required]),
+        age: new FormControl('', []),
+      })
+    );
+  }
+
+  removeGuestFields(i: number) {
+    this.plusses.removeAt(i);
+  }
+
+  get plusses() {
+    return this.guestForm.get('plusses') as FormArray;
+  }
+
+  get allowedPlusses(): number {
+    return Number(this.guestForm.get('allowedPlusses')) || 0;
   }
 }
