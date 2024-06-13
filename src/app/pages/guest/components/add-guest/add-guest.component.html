@@ -13,7 +13,11 @@
   </form>
 </div>
 <div mat-dialog-actions align="end">
-  <button mat-raised-button (click)="onClickAddToGuestList()">
+  <button
+    mat-raised-button
+    (click)="onClickAddToGuestList()"
+    [disabled]="guestForm.valid"
+  >
     Add to Guest List
   </button>
 </div>

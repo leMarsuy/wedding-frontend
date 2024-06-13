@@ -23,7 +23,7 @@ export class AddGuestComponent implements OnInit {
 
   onClickAddToGuestList() {
     var { name, allowedPlusses } = this.guestForm.value;
-    name = 'name'.toUpperCase();
+    name = name.toUpperCase();
     this.guestApi.addGuest(name, allowedPlusses).subscribe((res) => {
       this.dialogRef.close();
     });
