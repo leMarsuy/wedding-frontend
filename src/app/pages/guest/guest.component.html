@@ -1,27 +1,40 @@
 <div class="container mx-auto py-12 px-10">
   <div class="flex justify-between mb-4 p-6 border-gray mat-elevation-z1">
     <h3 class="font-bold text-center text-2xl">Our Guests</h3>
-    <button mat-raised-button color="primary" (click)="onClickAddGuestBtn()">
-      + Add Guest
-    </button>
+    <div>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onClickAddGuestBtn()"
+        class="ml-4"
+      >
+        + Add Guest
+      </button>
+      <button mat-raised-button class="ml-4">Download</button>
+    </div>
   </div>
   <div class="grid grid-cols-4 gap-2" *ngIf="stats">
+    <div class="col-span-4 px-4">
+      <p class="text-slate-600 text-sm">
+        Aggretated as of {{ statsAsOf | date : "long" }}
+      </p>
+    </div>
     <div class="col-span-1 flex mat-elevation-z1 p-4">
       <h1 class="w-[4rem]">{{ stats.totalInvitation }}</h1>
       <p>Total Invitations</p>
     </div>
 
-    <div class="col-span-1 flex mat-elevation-z1 p-4 bg-[]">
+    <div class="col-span-1 flex mat-elevation-z1 p-4 bg-cyan-200">
       <h1 class="w-[4rem]">{{ stats.totalPositiveResponse }}</h1>
       <p>Positive Response</p>
     </div>
 
-    <div class="col-span-1 flex mat-elevation-z1 p-4">
+    <div class="col-span-1 flex mat-elevation-z1 p-4 bg-rose-200">
       <h1 class="w-[4rem]">{{ stats.totalNegativeResponse }}</h1>
       <p>Negative Response</p>
     </div>
 
-    <div class="col-span-1 flex mat-elevation-z1 p-4">
+    <div class="col-span-1 flex mat-elevation-z1 p-4 bg-slate-200">
       <h1 class="w-[4rem]">{{ stats.totalPendingResponse }}</h1>
       <p>Pending Response</p>
     </div>
@@ -31,7 +44,7 @@
       <p>Allocated Seats</p>
     </div>
 
-    <div class="col-span-1 flex mat-elevation-z1 p-4">
+    <div class="col-span-1 flex mat-elevation-z1 p-4 bg-emerald-200">
       <h1 class="w-[4rem]">{{ stats.totalConfirmedSeat }}</h1>
       <p>Confirmed Seats</p>
     </div>
@@ -46,50 +59,65 @@
       <p>Adults</p>
     </div>
   </div>
-  <table mat-table [dataSource]="dataSource" class="w-full mat-elevation-z1">
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-    </ng-container>
+  <div class="mt-4">
+    <table mat-table [dataSource]="dataSource" class="w-full">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef class="text-white">Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="isAttending">
-      <th mat-header-cell *matHeaderCellDef>Is Attending</th>
-      <td mat-cell *matCellDef="let element">{{ element.isAttending }}</td>
-    </ng-container>
+      <ng-container matColumnDef="isAttending">
+        <th mat-header-cell *matHeaderCellDef class="text-white">
+          Is Attending
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.isAttending }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef>Email</th>
-      <td mat-cell *matCellDef="let element">{{ element.email || "-" }}</td>
-    </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef class="text-white">Email</th>
+        <td mat-cell *matCellDef="let element">{{ element.email || "-" }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="mobile">
-      <th mat-header-cell *matHeaderCellDef>Mobile</th>
-      <td mat-cell *matCellDef="let element">{{ element.mobile || "-" }}</td>
-    </ng-container>
+      <ng-container matColumnDef="mobile">
+        <th mat-header-cell *matHeaderCellDef class="text-white">Mobile</th>
+        <td mat-cell *matCellDef="let element">{{ element.mobile || "-" }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="allowedPlusses">
-      <th mat-header-cell *matHeaderCellDef>Allocated Seats</th>
-      <td mat-cell *matCellDef="let element">
-        {{
-          element._totalAttendees + "/" + ((element.allowedPlusses || 0) + 1)
-        }}
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="notes">
+        <th mat-header-cell *matHeaderCellDef class="text-white">Notes</th>
+        <td mat-cell *matCellDef="let element">{{ element.notes || "-" }}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef>Action</th>
-      <td mat-cell *matCellDef="let element">
-        <mat-icon
-          class="cursor-pointer mr-4"
-          (click)="onClickEditGuestBtn(element)"
-        >
-          edit
-        </mat-icon>
-        <mat-icon class="cursor-pointer text-red-600">delete</mat-icon>
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="allowedPlusses">
+        <th mat-header-cell *matHeaderCellDef class="text-white">
+          Allocated Seats
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{
+            element._totalAttendees + "/" + ((element.allowedPlusses || 0) + 1)
+          }}
+        </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef class="text-white">Action</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-icon
+            class="cursor-pointer mr-4"
+            (click)="onClickEditGuestBtn(element)"
+          >
+            edit
+          </mat-icon>
+          <mat-icon class="cursor-pointer text-red-600">delete</mat-icon>
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        class="bg-slate-500"
+        *matHeaderRowDef="displayedColumns; sticky: true"
+      ></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
 </div>

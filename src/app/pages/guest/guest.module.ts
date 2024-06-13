@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { EditGuestComponent } from './components/edit-guest/edit-guest.component';
+import { ConfirmationDialogModule } from 'src/app/shared/confirmation-dialog/confirmation-dialog.module';
 
 @NgModule({
   declarations: [GuestComponent, AddGuestComponent, EditGuestComponent],
@@ -26,6 +27,7 @@ import { EditGuestComponent } from './components/edit-guest/edit-guest.component
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    ConfirmationDialogModule,
   ],
 })
 export class GuestModule {}

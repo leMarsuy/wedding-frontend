@@ -11,9 +11,7 @@ interface GuestStats {
   totalPendingResponse: Number;
   totalAllocatedSeat: Number;
   totalConfirmedSeat: Number;
-
   totalConfirmedKids: Number;
-
   totalConfirmedAdults: Number;
 }
 
@@ -28,6 +26,7 @@ export class GuestComponent implements OnInit {
     'isAttending',
     'email',
     'mobile',
+    'notes',
     'allowedPlusses',
     'action',
   ];
@@ -41,9 +40,14 @@ export class GuestComponent implements OnInit {
     this.getStats();
   }
 
+  statsAsOf = new Date();
   getStats() {
     this.guestApi.getGuestStats().subscribe((res: any) => {
       this.stats = res.env.stats;
+      this.statsAsOf = new Date();
+      setTimeout(() => {
+        this.getStats();
+      }, 15000);
     });
   }
 

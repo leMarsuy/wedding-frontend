@@ -1,7 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { GuestApiService } from 'src/app/services/api/guest-api/guest-api.service';
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-edit-guest',
@@ -19,7 +24,8 @@ export class EditGuestComponent implements OnInit {
   constructor(
     private guestApi: GuestApiService,
     private dialogRef: MatDialogRef<EditGuestComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: any
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -46,8 +52,27 @@ export class EditGuestComponent implements OnInit {
   }
 
   onClickDelete() {
-    var { id } = this.guestForm.getRawValue();
+    var { name, id } = this.guestForm.getRawValue();
+    this.dialog
+      .open(ConfirmationDialogComponent, {
+        data: {
+          title: 'Delete ' + name + ' from your list?',
+          message:
+            'Are you sure? This action is irreversible so please proceed with caution',
+          positiveText: 'Proceed on deleting',
+          negativeText: 'Cancel',
+        },
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) this.delete();
+      });
+  }
+
+  delete() {
+    var { id, name } = this.guestForm.getRawValue();
     this.guestApi.deleteGuest(id).subscribe((res) => {
+      alert(name + ' successfully removed from the list!');
       this.dialogRef.close();
     });
   }
