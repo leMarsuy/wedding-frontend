@@ -18,6 +18,7 @@ import { MapModule } from 'src/app/shared/map/map.module';
 import { AttireComponent } from './components/attire/attire.component';
 import { FaqsComponent } from './components/faqs/faqs.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatRadioModule,
     MapModule,
+    MatTooltipModule,
   ],
   exports: [
     HeaderComponent,

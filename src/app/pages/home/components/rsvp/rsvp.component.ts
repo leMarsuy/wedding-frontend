@@ -42,6 +42,7 @@ export class RsvpComponent implements OnInit {
       .subscribe((res: any) => {
         this.searching = false;
         if (res.env.guest) {
+          console.log(res);
           this.showError = false;
           var {
             _id,
@@ -85,6 +86,9 @@ export class RsvpComponent implements OnInit {
           age: new FormControl(plusses && plusses[i] ? plusses[i].age : '', [
             Validators.required,
           ]),
+          isPermanent: new FormControl(
+            plusses && plusses[i] ? plusses[i].isPermanent : false
+          ),
         })
       );
   }

@@ -91,8 +91,20 @@
                     formControlName="age"
                     type="number"
                   />
-                  <mat-icon matSuffix (click)="removeGuestFields(i)">
+                  <mat-icon
+                    matSuffix
+                    (click)="removeGuestFields(i)"
+                    *ngIf="!plusOne.get('isPermanent')?.value"
+                  >
                     close
+                  </mat-icon>
+                  <mat-icon
+                    matSuffix
+                    matTooltip="Special Picked by the Couple"
+                    class="text-emerald-800"
+                    *ngIf="plusOne.get('isPermanent')?.value"
+                  >
+                    verified
                   </mat-icon>
                 </mat-form-field>
               </ng-container>
