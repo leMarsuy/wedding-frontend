@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class GuestApiService {
-  URL = 'https://charmed-tungsten-bird.glitch.me/api/v1/';
+  URL = 'https://wedding-backend-z9m9i.ondigitalocean.app/api/v1';
   // 'http://localhost:3002/api/v1/';
 
   constructor(private httpClient: HttpClient) {}
